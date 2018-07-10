@@ -1,0 +1,52 @@
+import requests
+from config import *
+import json
+print('Type to search')
+search = str(input())
+URL = 'https://www.googleapis.com/customsearch/v1'
+payload1 = {'key': API, 'cx': cx, 'q': search}
+r1 = requests.get(URL, params=payload1)
+r1 = r1.json()
+def names():
+    for names in r['items']:
+        print(names['title'], names['link'])
+
+def names1():
+    for names in r1['items']:
+        print(names['title'], names['link'])
+print(names1())
+
+print('Do you want to choose another page? Type yes or quit to exit.')
+num = str(input())
+while num != 'quit': 
+    print('Type the number of page or print quit to exit')
+    num = str(input())
+    num0 = int(num) #приводим число строки к значению start
+    if num0>1:
+        num1 = num0 - 1
+        num2 = str(num1)
+        num3 = num2 + "1"
+        payload = {'key': API, 'cx': cx, 'q': search, 'start': num3} #меняю payload, включая в него функцию start
+        r =requests.get(URL, params=payload)
+        r = r.json()
+        print(names())
+    else:
+        num3 = 1
+        payload = {'key': API, 'cx': cx, 'q': search, 'start': num3} #меняю payload, включая в него функцию start
+        r =requests.get(URL, params=payload)
+        r = r.json()
+        print(names())
+        
+          
+#https://www.googleapis.com/customsearch/v1?key=INSERT_YOUR_API_KEY&cx=017576662512468239146:omuauf_lfve&q=lectures
+
+
+
+#print(r.url)
+
+
+
+
+
+
+
