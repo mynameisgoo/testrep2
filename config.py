@@ -1,0 +1,3 @@
+API = 'AIzaSyBVhzMCKR_M8QjUvEyEuzIZ24PgVJu8TEA'
+cx = '017576662512468239146:omuauf_lfve'
+
