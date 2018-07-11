@@ -7,8 +7,7 @@ def numb(i):"""
     :param i: введенный номер страницы
     :return: преобразованный номер страницы 
     """
-    if i > 1:
-        i = i * 10 - 9
+        i = (i - 1) * 10 + 1
     return i
 
 def find(search, number):"""
