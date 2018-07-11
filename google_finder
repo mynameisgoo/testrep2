@@ -2,32 +2,32 @@ import requests
 from config import *                                   #импортирую значения API, cx
 print('Type to search')
 search = str(input())
-URL = 'https://www.googleapis.com/customsearch/v1'     #основной сайт, на который мы делаем запрос
+URL = 'https://www.googleapis.com/customsearch/v1'     
 num = 1                                                #параметр start на 1ой странице равняется единице
 payload = {'key': API, 'cx': cx, 'q': search, 'start': num}
-r = requests.get(URL, payload).json()                  #получаем запрос в виде json объекта
+r = requests.get(URL, payload).json()                  
 def results():                                         #создаем функцию results, чтобы выводить название и ссылку сайта
-    for names in r['items']:                           #цикл for печатает все значения параметра title и link в items
+    for names in r['items']:                          
         print(names['title'], names['link'])
 
-results()                                              #печатаем полученный результат, 1я страница
-print('Choose a page by typing 1-10 or type quit to exit')  #предлагаем выбрать страницу
-number = input()                                            #вводим номер в переменную number
+results()                                              
+print('Choose a page by typing 1-10 or type quit to exit')  
+number = input()                                           
 if number == str:                                           #если тип переменной - строка, программа закрывается, если нет - создается цикл
     quit()
 else:
     while number != "quit":                                 #цикл - пока значение number не quit, выполняется условие
         if int(number) > 1:                                 #условие: если number больше единицы, то преобразуем number: для цифры 2 - 11, для цифры 3 - 21 и т.д.
             number = str(int(number) - 1) + "1"
-            payload.update({'start': number})               #обновляем значение, чтобы сделать запрос нужной страницы
-            r = requests.get(URL, payload).json()           #делаем запрос с нужной страницей
-            results()                                       #при помощи results выводим значения
-        else:                                               #но хитрый пользователь может ввести и 1, и 0, и -1
-            number = 1                                      #тогда мы его оставляем на 1ой странице
+            payload.update({'start': number})               
+            r = requests.get(URL, payload).json()           
+            results()                                      
+        else:                                               #хитрый пользователь может ввести и 1, и 0, и -1
+            number = 1                                      
             r = requests.get(URL, payload).json()
             print(results())
-        print('Choose a page by typing 1-10 or type quit to exit') #каждый раз, когда выводится страница с результатами, в конце предлагаем сделать выбор
-        number = input()                                           #и ввести новое число
+        print('Choose a page by typing 1-10 or type quit to exit') 
+        number = input()                                           
 
 
 
