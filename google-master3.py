@@ -2,18 +2,20 @@ import requests
 from config import *
 
 
-def numb(i):
-    """
-    преобразует номер страницы в нужное значение start
+def numb(i):"""
+
+    :param i: введенный номер страницы
+    :return: преобразованный номер страницы 
     """
     if i > 1:
         i = i * 10 - 9
     return i
 
-def find(search, number):
-    """
-    делает запрос с параметрами, получает json объект
-    выводит из него название и ссылку страниц
+def find(search, number):"""
+
+    :param search: введеный текст пользователя, 
+    :param number: введенное число страницы, преобразованное функцией numb()
+    :return: название страницы и её ссылка
     """
     payload = {'key': API, 'cx': cx, 'q': search, 'start': number}
     r = requests.get('https://www.googleapis.com/customsearch/v1', payload).json()
